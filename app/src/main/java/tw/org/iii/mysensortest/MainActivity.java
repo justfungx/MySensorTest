@@ -8,6 +8,7 @@ import android.hardware.SensorManager;
 import android.icu.text.DisplayContext;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.util.List;
@@ -25,15 +26,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        textX = (TextView)findViewById(R.id.vX);
+        textY = (TextView)findViewById(R.id.vY);
+        textZ = (TextView)findViewById(R.id.vZ);
+
 
         smgr = (SensorManager)getSystemService(SENSOR_SERVICE);
+
         List<Sensor>sensors = smgr.getSensorList(sensor.TYPE_ALL);
         for (Sensor s: sensors){
             String name = s.getName();
             String vendor = s.getVendor();
-            textX = (TextView)findViewById(R.id.vX);
-            textY = (TextView)findViewById(R.id.vY);
-            textZ = (TextView)findViewById(R.id.vZ);
+
+            Log.d("DK", name + ":" + vendor);
 
         }
 
@@ -67,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
             vz = values[2];
 
             textX.setText("X: " + vx);
-//            textY.setText("Y: " + vy);
-//            textZ.setText("Z: " + vz);
+            textY.setText("Y: " + vy);
+            textZ.setText("Z: " + vz);
 
         }
 
